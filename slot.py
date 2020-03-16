@@ -98,7 +98,7 @@ class Slot(Resource):
 
         query = "UPDATE {table} SET status=? WHERE slotid=?".format(
             table=cls.TABLE_NAME)
-        cursor.execute(query, (slot['slotid'], slot['status']))
+        cursor.execute(query, (slot['status'], slot['slotid']))
 
         connection.commit()
         connection.close()
