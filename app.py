@@ -4,7 +4,7 @@ from flask_jwt import JWT
 
 from security import authenticate, identity
 from user import UserRegister
-from item import Item, ItemList
+from slot import Slot, SlotsList
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True
@@ -26,8 +26,8 @@ def after_request(response):
 
 jwt = JWT(app, authenticate, identity)
 
-api.add_resource(Item, '/item/<string:name>')
-api.add_resource(ItemList, '/items')
+api.add_resource(Slot, '/slot/<string:slotid>')
+api.add_resource(SlotsList, '/slots')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':
