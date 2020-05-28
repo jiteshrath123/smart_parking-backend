@@ -96,3 +96,31 @@ class UserRegister(Resource):
         connection.close()
 
         return {"message": "User created successfully."}, 201
+
+
+class Login(Resource):
+    TABLE_NAME = 'users'
+
+    parser = reqparse.RequestParser()
+    parser.add_argument('username',
+                        type=str,
+                        required=True,
+                        help="This field cannot be left blank!"
+                        )
+    parser.add_argument('password',
+                        type=str,
+                        required=True,
+                        help="This field cannot be left blank!"
+                        )
+
+    def post(self):
+        data = Login.parser.parse_args()
+
+        user = User.find_by_username(data['username'])
+        if user:
+            if(user.password == data['password']):
+                return {'username':user.username,'userid': user.id,'car_no':user.car_no,'name':user.name,'mobile':user.mobile}
+            else:
+                return {'message': 'Incorrect Password Try Again'}, 400
+        else:
+            return {"message": "User with that username does not exists."}, 400

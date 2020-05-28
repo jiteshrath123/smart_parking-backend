@@ -34,6 +34,7 @@ class Slot(Resource):
         if row:
             return {'slot': {'id': row[0], 'status': row[1]}}
 
+    
     def post(self, slotid):
         if self.find_by_name(slotid):
             return {'message': "An item with name '{}' already exists.".format(slotid)}
@@ -60,7 +61,6 @@ class Slot(Resource):
         connection.commit()
         connection.close()
 
-    @jwt_required()
     def delete(self, slotid):
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
@@ -74,7 +74,6 @@ class Slot(Resource):
 
         return {'message': 'Item deleted'}
 
-    @jwt_required()
     def put(self, slotid):
         data = Slot.parser.parse_args()
         slot = self.find_by_name(slotid)
@@ -107,6 +106,7 @@ class Slot(Resource):
 class SlotsList(Resource):
     TABLE_NAME = 'slots'
 
+    
     def get(self):
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
