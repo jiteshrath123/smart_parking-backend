@@ -9,10 +9,10 @@ cursor = connection.cursor()
 create_table = "create table users(name varchar(20) NOT NULL, username varchar(20) NOT NULL, userid INTEGER PRIMARY KEY AUTOINCREMENT, password varchar(8) NOT NULL, mobile char(10) NOT NULL, car_no varchar(10) NOT NULL)"
 cursor.execute(create_table)
 
-create_table = "create table slots(slotid int PRIMARY KEY NOT NULL, status bool DEFAULT 0)"
+create_table = "create table slots(slotid int PRIMARY KEY NOT NULL, status int DEFAULT 0)"
 cursor.execute(create_table)
 
-create_table = "create table bookings(username varchar(20) NOT NULL, slotid int NOT NULL, booking_id INTEGER PRIMARY KEY AUTOINCREMENT, start_time TIMESTAMP, end_time TIMESTAMP, FOREIGN KEY (username) REFERENCES user(username) ON DELETE CASCADE, FOREIGN KEY (slotid) REFERENCES slot(slotid) ON DELETE CASCADE)"
+create_table = "create table bookings(userid INTEGER NOT NULL, slotid int NOT NULL, booking_id INTEGER PRIMARY KEY AUTOINCREMENT, start_time TIMESTAMP, end_time TIMESTAMP, FOREIGN KEY (userid) REFERENCES user(userid) ON DELETE CASCADE, FOREIGN KEY (slotid) REFERENCES slot(slotid) ON DELETE CASCADE)"
 cursor.execute(create_table)
 
 create_table = "create table wardens(wardenname varchar(20) PRIMARY KEY, password varchar(8) NOT NULL)"

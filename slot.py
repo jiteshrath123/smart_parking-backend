@@ -8,12 +8,12 @@ class Slot(Resource):
 
     parser = reqparse.RequestParser()
     parser.add_argument('status',
-                        type=bool,
+                        type=int,
                         required=True,
                         help="This field cannot be left blank!"
                         )
 
-    @jwt_required()
+    
     def get(self, slotid):
         slot = self.find_by_name(slotid)
         if slot:

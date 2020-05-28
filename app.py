@@ -5,6 +5,7 @@ from flask_jwt import JWT
 from security import authenticate, identity
 from user import UserRegister, Login
 from slot import Slot, SlotsList
+from booking import Booking
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True
@@ -38,6 +39,7 @@ api.add_resource(Login, '/login')
 api.add_resource(Slot, '/slot/<string:slotid>')
 api.add_resource(SlotsList, '/slots')
 api.add_resource(UserRegister, '/register')
+api.add_resource(Booking, '/book')
 
 if __name__ == '__main__':
     app.run(debug=True)  # important to mention debug=True
